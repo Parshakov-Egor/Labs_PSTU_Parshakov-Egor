@@ -1,5 +1,6 @@
 ﻿#include <iostream>
-#include <math.h>
+#include <cmath>
+#include <clocale>
 
 using namespace std;
 
@@ -8,14 +9,14 @@ int main()
     setlocale(LC_ALL, "Russian");
 
     // Задание 1 (float)
-    float a = 1000, b = 0.0001;
+    float a = 1000, b = 0.0001f;
     float c, d, e, f, g, res1;
 
-    c = pow(a + b, 3);
-    d = pow(a, 3);
+    c = powf(a + b, 3);
+    d = powf(a, 3);
     e = 3 * a * a * b;
     f = 3 * a * b * b;
-    g = pow(b, 3);
+    g = powf(b, 3);
     res1 = (c - (d + e)) / (f + g);
 
     cout << "Результат float: " << res1 << endl;
