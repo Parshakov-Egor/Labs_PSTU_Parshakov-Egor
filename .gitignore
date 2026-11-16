@@ -1,6 +1,16 @@
+# Служебные файлы сред разработки
+.vs/
+.vscode/
+
+# Результаты компиляции
 *.exe
 *.obj
 *.o
 *.out
+*.pdb
+*.ilk
 build/
-.vscode/
+
+# Системные файлы
+Thumbs.db
+.DS_Store

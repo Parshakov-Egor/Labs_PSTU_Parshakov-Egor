@@ -1,43 +1,65 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cmath>
+#include <clocale>
+#include <iomanip>
 
 using namespace std;
 
-int main() {
-    double a = 0.1;
-    double b = 1.0;
-    int k = 10;
-    double h = (b - a) / k;
-    int n = 40;
-    double eps = 0.0001;
+int main()
+{
+    setlocale(LC_ALL, "Russian");
 
-    cout << "X\t\tSN\t\tSE\t\tY" << endl;
-    cout << "--------------------------------------------------------" << endl;
+    const double PI = 3.14159265358979323846;
+    const double a = PI / 5.0;
+    const double b = PI;
+    const int k = 10;          // Количество разбиений отрезка.
+    const int n = 40;          // Количество слагаемых для суммы SN.
+    const double eps = 0.0001; // Точность для суммы SE.
+    const double h = (b - a) / k;
 
-    for (double x = a; x <= b + h / 2.0; x += h) {
+    cout << "Вычисление функции разложением в ряд" << endl;
+    cout << "X - аргумент, SN - 40 слагаемых, SE - заданная точность, Y - точное значение" << endl;
+    cout << string(78, '-') << endl;
+    cout << setw(12) << "X" << setw(18) << "SN"
+         << setw(18) << "SE" << setw(18) << "Y" << endl;
+    cout << string(78, '-') << endl;
+    cout << fixed << setprecision(6);
+
+    // Внешний цикл перебирает ровно 11 точек от a до b включительно.
+    for (int step = 0; step <= k; step++)
+    {
+        double x = a + step * h;
         double sn = 0.0;
-        double a_term = x;
-        sn = sn + a_term;
 
-        for (int i = 1; i < n; i++) {
-            a_term = a_term * (x * x) / (2.0 * i * (2.0 * i + 1.0));
-            sn = sn + a_term;
+        // Сумма заданного числа слагаемых: cos((2m-1)x)/(2m-1)^2.
+        for (int m = 1; m <= n; m++)
+        {
+            double odd = 2.0 * m - 1.0;
+            sn += cos(odd * x) / (odd * odd);
         }
 
+        // Для второй суммы останавливаемся, когда |очередной член| < eps.
         double se = 0.0;
-        double e_term = x;
         int m = 1;
+        while (true)
+        {
+            double odd = 2.0 * m - 1.0;
+            double term = cos(odd * x) / (odd * odd);
 
-        while (fabs(e_term) >= eps) {
-            se = se + e_term;
-            e_term = e_term * (x * x) / (2.0 * m * (2.0 * m + 1.0));
+            if (fabs(term) < eps)
+                break;
+
+            se += term;
             m++;
         }
 
-        double y = sinh(x);
+        // На отрезке [pi/5; pi] значение x положительно, поэтому |x| = x.
+        double y = PI * PI / 8.0 - PI / 4.0 * fabs(x);
 
-        cout << x << "\t" << sn << "\t" << se << "\t" << y << endl;
+        cout << setw(12) << x << setw(18) << sn
+             << setw(18) << se << setw(18) << y << endl;
     }
 
+    cout << string(78, '-') << endl;
     return 0;
 }

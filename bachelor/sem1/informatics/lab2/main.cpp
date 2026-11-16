@@ -1,6 +1,7 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cmath>
 #include <clocale>
+#include <iomanip>
 
 using namespace std;
 
@@ -8,22 +9,41 @@ int main()
 {
     setlocale(LC_ALL, "Russian");
 
-    double eps = 0.0001;
-    double s = 0.0;
-    int n = 2; // При n = 1 значение a_1 = lg(1!) * e^(-1) = 0
+    const double eps = 0.0001;
+    double sum = 0.0;
 
-    // Вычисляем a_2
-    double an = log10(tgamma(n + 1)) * exp(-n * sqrt(n));
+    // Первый член ряда при n = 1 равен нулю, поэтому начинаем с n = 2.
+    int n = 2;
+    double factorial = 2.0; // Факториал текущего n: 2! = 2.
+    double term = log10(factorial) * exp(-n * sqrt(n));
+    int addedTerms = 0;
 
-    while (an >= eps)
+    cout << "Учитываемые члены ряда:" << endl;
+    cout << fixed << setprecision(10);
+
+    // Добавляем члены, пока текущий член не станет меньше точности eps.
+    while (term >= eps)
     {
-        s += an;
-        n++;
-        // Вычисляем следующий член ряда
-        an = log10(tgamma(n + 1)) * exp(-n * sqrt(n));
+        cout << "n = " << n << ", a(n) = " << term << endl;
+        sum += term;
+        addedTerms++;
+
+        // Переходим к следующему члену по рекуррентному соотношению.
+        // Факториал также получаем из предыдущего: (n + 1)! = n! * (n + 1).
+        int nextN = n + 1;
+        double nextFactorial = factorial * nextN;
+        double logarithmRatio = log10(nextFactorial) / log10(factorial);
+        double exponentRatio = exp(n * sqrt(n) - nextN * sqrt(nextN));
+
+        term = term * logarithmRatio * exponentRatio;
+        factorial = nextFactorial;
+        n = nextN;
     }
 
-    cout << "Сумма ряда с точностью 0.0001 равна: " << s << endl;
+    cout << "\nПервый член меньше точности: n = " << n
+         << ", a(n) = " << term << endl;
+    cout << "Количество сложенных членов: " << addedTerms << endl;
+    cout << "Сумма ряда с точностью " << eps << ": " << sum << endl;
 
     return 0;
 }

@@ -1,6 +1,7 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cmath>
 #include <clocale>
+#include <iomanip>
 
 using namespace std;
 
@@ -8,45 +9,57 @@ int main()
 {
     setlocale(LC_ALL, "Russian");
 
-    // Задание 1 (float)
-    float a = 1000, b = 0.0001f;
-    float c, d, e, f, g, res1;
+    // Задание 1: вычисляем одно выражение сначала в float, затем в double.
+    // Промежуточные переменные нужны, чтобы повторить порядок из методички.
+    float a = 1000.0f;
+    float b = 0.0001f;
 
-    c = powf(a + b, 3);
-    d = powf(a, 3);
-    e = 3 * a * a * b;
-    f = 3 * a * b * b;
-    g = powf(b, 3);
-    res1 = (c - (d + e)) / (f + g);
+    float c = pow(a + b, 3.0f);
+    float d = pow(a, 3.0f);
+    float e = 3.0f * a * a * b;
+    float f = 3.0f * a * b * b;
+    float g = pow(b, 3.0f);
+    float resultFloat = (c - (d + e)) / (f + g);
 
-    cout << "Результат float: " << res1 << endl;
+    double aDouble = 1000.0;
+    double bDouble = 0.0001;
 
-    // Задание 1 (double)
-    double a1 = 1000, b1 = 0.0001;
-    double c1, d1, e1, f1, g1, res2;
+    double cDouble = pow(aDouble + bDouble, 3);
+    double dDouble = pow(aDouble, 3);
+    double eDouble = 3.0 * aDouble * aDouble * bDouble;
+    double fDouble = 3.0 * aDouble * bDouble * bDouble;
+    double gDouble = pow(bDouble, 3);
+    double resultDouble = (cDouble - (dDouble + eDouble)) / (fDouble + gDouble);
 
-    c1 = pow(a1 + b1, 3);
-    d1 = pow(a1, 3);
-    e1 = 3 * a1 * a1 * b1;
-    f1 = 3 * a1 * b1 * b1;
-    g1 = pow(b1, 3);
-    res2 = (c1 - (d1 + e1)) / (f1 + g1);
+    cout << scientific << setprecision(8);
+    cout << "Задание 1" << endl;
+    cout << "Результат при типе float:  " << resultFloat << endl;
+    cout << "Результат при типе double: " << resultDouble << endl;
 
-    cout << "Результат double: " << res2 << endl;
-
-    // Задание 2
+    // Задание 2: значения n и m меняются после каждого инкремента.
     int n, m;
-    cout << "\nВведите n и m: ";
-    cin >> n >> m;
+    cout << "\nЗадание 2" << endl;
+    cout << "Введите два целых числа n и m: ";
 
-    int r1 = ++n * ++m;
-    cout << "1) ++n * ++m = " << r1 << " (n=" << n << ", m=" << m << ")" << endl;
+    if (!(cin >> n >> m))
+    {
+        cout << "Ошибка: нужно ввести два целых числа." << endl;
+        return 1;
+    }
 
-    int r2 = m++ < n;
-    cout << "2) m++ < n = " << r2 << " (n=" << n << ", m=" << m << ")" << endl;
+    // Префиксный инкремент сначала увеличивает переменную, затем использует её.
+    int first = ++n * ++m;
+    cout << "1) ++n * ++m = " << first
+         << "; n = " << n << ", m = " << m << endl;
 
-    int r3 = n++ > m;
-    cout << "3) n++ > m = " << r3 << " (n=" << n << ", m=" << m << ")" << endl;
+    // Постфиксный инкремент использует старое значение, а потом увеличивает его.
+    int second = m++ < n;
+    cout << "2) m++ < n = " << second
+         << "; n = " << n << ", m = " << m << endl;
+
+    int third = n++ > m;
+    cout << "3) n++ > m = " << third
+         << "; n = " << n << ", m = " << m << endl;
 
     return 0;
 }
