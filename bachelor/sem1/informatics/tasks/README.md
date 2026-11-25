@@ -25,5 +25,7 @@
 | 14 | Задача о восьми ферзях: поиск всех 92 расстановок | [main.cpp](14_eight_queens/main.cpp) | [PNG](14_eight_queens/flowchart.png) |
 | 15 | Заполнение квадратной матрицы нулями и единицами по правилу | [main.cpp](15_matrix_pattern/main.cpp) | [PNG](15_matrix_pattern/flowchart.png) |
 | 16 | Суммы строк матрицы размером 2 × 4 | [main.cpp](16_matrix_row_sums/main.cpp) | [PNG](16_matrix_row_sums/flowchart.png) |
+| 17 | Каталог квартир с поиском по цене | [main.cpp](17_apartment/main.cpp) | [PNG](17_apartment/flowchart.png) |
+| 18 | Рисование ромба | [main.cpp](18_romb/main.cpp) | [PNG](18_romb/flowchart.png) |
 
 > В задании 13 память во второй части намеренно не освобождается. В обычных программах каждому `new` должен соответствовать `delete`, а каждому `new[]` - `delete[]`.

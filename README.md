@@ -41,5 +41,5 @@ bachelor/
         ├── lab06/   # main.cpp, flowchart.png, отчёт DOCX
         ├── lab07/   # main.cpp, days.cpp, две схемы, отчёт DOCX
         ├── lab10/   # main.cpp, две схемы, отчёт DOCX
-        └── tasks/   # 16 дополнительных заданий с кодом и схемами
+        └── tasks/   # дополнительные задания с кодом и схемами
 ```
