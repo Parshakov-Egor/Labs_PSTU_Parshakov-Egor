@@ -27,5 +27,6 @@
 | 16 | Суммы строк матрицы размером 2 × 4 | [main.cpp](16_matrix_row_sums/main.cpp) | [PNG](16_matrix_row_sums/flowchart.png) |
 | 17 | Каталог квартир с поиском по цене | [main.cpp](17_apartment/main.cpp) | [PNG](17_apartment/flowchart.png) |
 | 18 | Рисование ромба | [main.cpp](18_romb/main.cpp) | [PNG](18_romb/flowchart.png) |
+| 19 | Диагонали | [main.cpp](19_diagonal/main.cpp) | [PNG](19_diagonal/flowchart.png) |
 
 > В задании 13 память во второй части намеренно не освобождается. В обычных программах каждому `new` должен соответствовать `delete`, а каждому `new[]` - `delete[]`.
